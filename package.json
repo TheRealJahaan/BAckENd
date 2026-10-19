@@ -1,19 +1,64 @@
 {
   "name": "backend",
-  "version": "1.0.0",
-  "description": "basic app to deploy",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "Production-ready URL shortener REST API built with Express 5, TypeScript, Zod and SQLite.",
+  "type": "module",
+  "main": "dist/server.js",
+  "engines": {
+    "node": ">=22.13"
+  },
   "scripts": {
-    "start": "node index.js"
+    "dev": "tsx watch --disable-warning=ExperimentalWarning src/server.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node --disable-warning=ExperimentalWarning dist/server.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "check": "npm run lint && npm run format:check && npm run typecheck && npm test"
   },
   "keywords": [
-    "chai",
-    "node"
+    "express",
+    "typescript",
+    "rest-api",
+    "url-shortener",
+    "sqlite",
+    "zod",
+    "openapi"
   ],
   "author": "Jahaan Suthar",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1"
+    "@asteasolutions/zod-to-openapi": "^9.1.0",
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.1",
+    "helmet": "^8.3.0",
+    "jose": "^6.2.12",
+    "pino": "^10.4.0",
+    "pino-http": "^11.0.0",
+    "swagger-ui-express": "^5.0.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.5",
+    "@types/supertest": "^7.2.1",
+    "@types/swagger-ui-express": "^4.1.8",
+    "@vitest/coverage-v8": "^5.0.5",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
+    "pino-pretty": "^13.2.0",
+    "prettier": "^3.9.10",
+    "supertest": "^7.3.1",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.2",
+    "vitest": "^5.0.5"
   }
 }

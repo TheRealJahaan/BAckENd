@@ -1,0 +1,23 @@
+# Render Blueprint: New > Blueprint > pick this repo. JWT_SECRET is generated for you.
+services:
+  - type: web
+    name: backend-url-shortener
+    runtime: docker
+    plan: starter # persistent disks need a paid plan; on "free" the SQLite file resets on each deploy
+    healthCheckPath: /readyz
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_PATH
+        value: /data/app.db
+      - key: TRUST_PROXY
+        value: '1'
+      - key: JWT_SECRET
+        generateValue: true
+      - key: PUBLIC_BASE_URL
+        sync: false # set to your service URL, e.g. https://backend-url-shortener.onrender.com
+    disk:
+      name: data
+      mountPath: /data
+      sizeGB: 1
